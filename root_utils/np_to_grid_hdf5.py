@@ -17,9 +17,17 @@ if __name__ == '__main__':
     f = h5py.File(config.output_file, 'w')
 
     total_rows = 0
+    files = []
     for input_file in config.input_files:
-        if not os.path.isfile(input_file):
-            raise ValueError(input_file+" does not exist")
+        if os.path.isdir(input_file):
+            for file in os.listdir(mypath) if os.path.isfile(join(mypath, file)):
+                files += join(mypath, file)
+        else
+            if not os.path.isfile(input_file):
+                raise ValueError(input_file+" does not exist")
+            files += input_file
+
+    for input_file in files:
         npz_file = np.load(input_file)
         total_rows += npz_file['event_id'].shape[0]
 
@@ -47,7 +55,7 @@ if __name__ == '__main__':
     offset = 0
     offset_next = 0
     label_map = {22: 0, 11: 1, 13: 2}
-    for input_file in config.input_files:
+    for input_file in files:
         npz_file = np.load(input_file)
         event_id = npz_file['event_id']
         root_file = npz_file['root_file']
