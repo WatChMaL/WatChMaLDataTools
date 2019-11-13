@@ -20,9 +20,10 @@ if __name__ == '__main__':
     files = []
     for input_file in config.input_files:
         if os.path.isdir(input_file):
-            for infile in os.listdir(mypath) if os.path.isfile(join(mypath, infile)):
-                files += join(mypath, infile)
-        else
+            for infile in os.listdir(input_file):
+                if os.path.isfile(join(input_file, infile)):
+                    files += join(input_file, infile)
+        else:
             if not os.path.isfile(input_file):
                 raise ValueError(input_file+" does not exist")
             files += input_file
