@@ -36,6 +36,8 @@ if __name__ == '__main__':
         print(npz_file['event_id'].shape[0],"events found in ", input_file)
         total_rows += npz_file['event_id'].shape[0]
 
+    print("Total events:", total_rows)
+
     dset_labels=f.create_dataset("labels",
                                  shape=(total_rows,),
                                  dtype=np.int32)
