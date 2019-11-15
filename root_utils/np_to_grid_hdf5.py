@@ -24,15 +24,16 @@ if __name__ == '__main__':
                 full_file = os.path.join(input_file, infile)
                 if os.path.isfile(full_file):
                     print("Adding file to list:", full_file)
-                    files += full_file
+                    files.append(full_file)
         else:
             if not os.path.isfile(input_file):
                 raise ValueError(input_file+" does not exist")
             print("Adding file to list:", input_file)
-            files += input_file
+            files.append(input_file)
 
     for input_file in files:
         npz_file = np.load(input_file)
+        print(npz_file['event_id'].shape[0],"events found in ", input_file)
         total_rows += npz_file['event_id'].shape[0]
 
     dset_labels=f.create_dataset("labels",
@@ -60,6 +61,7 @@ if __name__ == '__main__':
     offset_next = 0
     label_map = {22: 0, 11: 1, 13: 2}
     for input_file in files:
+        print("processing file:", input_file)
         npz_file = np.load(input_file)
         event_id = npz_file['event_id']
         root_file = npz_file['root_file']
