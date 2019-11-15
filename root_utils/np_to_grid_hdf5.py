@@ -21,11 +21,14 @@ if __name__ == '__main__':
     for input_file in config.input_files:
         if os.path.isdir(input_file):
             for infile in os.listdir(input_file):
-                if os.path.isfile(join(input_file, infile)):
-                    files += join(input_file, infile)
+                full_file = os.path.join(input_file, infile)
+                if os.path.isfile(full_file):
+                    print("Adding file to list:", full_file)
+                    files += full_file
         else:
             if not os.path.isfile(input_file):
                 raise ValueError(input_file+" does not exist")
+            print("Adding file to list:", input_file)
             files += input_file
 
     for input_file in files:
