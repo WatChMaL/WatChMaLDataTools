@@ -9,15 +9,10 @@ import numpy as np
 import h5py
 print(h5py.__version__)
 
-#fsig = uproot3.open('/Users/Alejandro/Desktop/skdetsim.b8.detsim_rdir.r062361.r077336.prepreprocess.root')
-fsig = uproot3.open('./copy_branches/electron.root')
-#fbg = uproot3.open('/Users/Alejandro/Documents/mcwit/data/redwit.074129.077889.lowfitwitE.root')
-#fbg = uproot3.open('/disk1/disk02/lowe9/ayankele/redwit_lowe_cuts_spal_fixed_076919.root')
-fbg = uproot3.open('./copy_branches/gamma.root')
-#fout = h5py.File('SKROOT_B8_redwit_4MeV.h5','w')
-fout = h5py.File('E30_electron_E30_gamma.h5','w')
-#findex = 'SKROOT_B8_redwit_4MeV_idxs.npz'
-findex = 'E30_electron_E30_gamma_idxs.npz'
+fsig = uproot3.open('/Users/Alejandro/Desktop/skdetsim.b8.detsim_rdir.r062361.r077336.prepreprocess.root')
+fbg = uproot3.open('/Users/Alejandro/Documents/mcwit/data/redwit.074129.077889.lowfitwitE.root')
+fout = h5py.File('SKROOT_B8_redwit_4MeV.h5','w')
+findex = 'SKROOT_B8_redwit_4MeV_idxs.npz'
 
 treesig=fsig['data']
 #treebg=fbg['wit']
@@ -29,11 +24,10 @@ nhitbg = treebg.array("nhits")
 
 nsig=len(nhitsig)
 nbg=len(nhitbg)
-print(nsig,nbg)
 
 nevsk_sig = np.arange(0,nsig,1)
 nevsk_bg = np.arange(0,nbg,1)
-print(nevsk_sig)
+
 hits_index_sig = np.append(0,np.cumsum(nhitsig)[:-1])
 hits_index_bg = np.append(0,np.cumsum(nhitbg)[:-1])+hits_index_sig[-1]+nhitsig[-1]
 
